@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HAZEL CAR</title>
+  <link rel="icon" type="image/svg+xml" href="image/logo2.jpeg">
+  <meta name="description" content="Location de voitures — Réservez facilement via WhatsApp. Thème rouge & noir, slider automatique, fiches véhicules et détails dynamiques."/>
+
+  <style>
+    /* ========= THEME ========= */
+    :root{
+      --rouge:#e10600;
+      --rouge2:#ff3b30;
+      --noir:#0a0a0a;
+      --gris:#141414;
+      --gris2:#1b1b1b;
+      --txt:#f1f1f1;
+      --txt-d:#bdbdbd;
+      --card:#121212;
+      --radius:18px;
+      --shadow:0 14px 36px rgba(0,0,0,.38);
+      --glow:0 0 0 0 rgba(225,6,0,.0);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      color:var(--txt);
+      background: radial-gradient(1200px 800px at 8% -10%, rgba(225,6,0,.08), transparent 45%),
+                  radial-gradient(1200px 800px at 92% 110%, rgba(255,59,48,.06), transparent 45%),
+                  linear-gradient(180deg,#090909 0%,#0f0f10 35%,#101113 100%);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    section{padding:44px 0}
+    .container{width:min(1200px,92%);margin:0 auto}
+
+    /* ========= HEADER ========= */
+    header{
+      position:sticky;top:0;z-index:60;
+      background:rgba(10,10,10,.55);
+      border-bottom:1px solid #191919;
+      backdrop-filter: blur(12px) saturate(120%);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
+    .logo{
+      width:80px;height:80px;border-radius:11px;
+     
+      display:grid;place-items:center;overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:contain;padding:4px}
+
+    .nav-wrap{display:flex;align-items:center;gap:10px}
+    .nav-links{display:flex;align-items:center;gap:4px}
+    .nav-links a{
+      padding:10px 12px;border-radius:12px;border:1px solid transparent;position:relative;
+      transition: color .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .nav-links a::after{
+      content:"";position:absolute;left:12px;right:12px;bottom:6px;height:2px;
+      background:linear-gradient(90deg,var(--rouge2),var(--rouge));
+      opacity:0;transform:scaleX(.4);transition:all .25s ease
+    }
+    .nav-links a:hover::after{opacity:1;transform:scaleX(1)}
+    .nav-links a.active{background:#141414;border-color:#262626}
+    .cta{
+      background:linear-gradient(180deg,var(--rouge2),var(--rouge));
+      padding:10px 16px;border-radius:999px;font-weight:700;
+      box-shadow:0 10px 26px rgba(225,6,0,.35);
+      transition: transform .15s ease;
+    }
+    .cta:active{transform:translateY(1px)}
+
+    /* Burger mobile */
+    .menu-btn{display:none;background:#151515;border:1px solid #262626;border-radius:12px;padding:8px 10px;cursor:pointer}
+    .menu-icon{width:20px;height:2px;background:#e6e6e6;position:relative;display:block}
+    .menu-icon::before,.menu-icon::after{content:"";position:absolute;left:0;right:0;height:2px;background:#e6e6e6}
+    .menu-icon::before{top:-6px}.menu-icon::after{top:6px}
+    @media(max-width:820px){
+      .nav-links{display:none;position:absolute;left:0;right:0;top:64px;background:#0f0f0f;border-bottom:1px solid #1a1a1a;padding:10px 12px;gap:4px}
+      .nav-links a{display:block}
+      .menu-btn{display:inline-flex}
+      header.nav-open .nav-links{display:flex;flex-direction:column}
+    }
+
+    /* ========= SECTION TITLES ========= */
+    .sec-head h2,
+    .about h2{
+      font-size:clamp(22px,4.2vw,34px);
+      margin:0 0 14px;
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .sec-head h2::after,
+    .about h2::after{
+      content:"";
+      display:block;
+      width:72px;height:3px;
+      margin-top:10px;
+      background:linear-gradient(90deg,var(--rouge2),var(--rouge));
+      border-radius:999px;
+      box-shadow:0 6px 22px rgba(225,6,0,.35);
+    }
+
+    /* ========= HERO / SLIDER ========= */
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid #1c1c1c}
+    .slider{position:relative;height:clamp(320px,48vw,560px)}
+    .slide{
+      position:absolute;inset:0;opacity:0;
+      background-size:cover;background-position:center;
+      transition:opacity .9s ease;
+      transform: scale(1.08); /* base for ken burns */
+    }
+    .slide.active{opacity:1;animation:kenburns 8s ease-in-out both}
+    .slide::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3) 40%,rgba(0,0,0,.8))
+    }
+    @keyframes kenburns{
+      0%{transform:scale(1.12)}
+      100%{transform:scale(1.0)}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .slide.active{animation:none}
+    }
+
+    .hero-caption{
+      position:absolute;inset:auto 0 28px 0;z-index:2
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(225,6,0,.12);color:#ffd7d7;border:1px solid rgba(225,6,0,.35);
+      padding:6px 10px;border-radius:999px;font-size:12px;letter-spacing:.3px
+    }
+    h1{font-size:clamp(24px,5.4vw,44px);margin:12px 0 8px;line-height:1.12;text-shadow:0 6px 22px rgba(0,0,0,.65)}
+    .hero p{color:var(--txt-d);max-width:820px;margin:0}
+
+    /* ========= ABOUT ========= */
+    .about{border-bottom:1px solid #1b1b1b}
+    .about-grid{display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
+    @media(min-width:980px){.about-grid{grid-template-columns:1.2fr .8fr}}
+    .about-lead{color:var(--txt-d);margin:6px 0 14px;max-width:64ch}
+    .features{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px;margin-top:12px}
+    @media(min-width:640px){.features{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    .feature{
+      background:linear-gradient(180deg,#151515,#101010);
+      border:1px solid #222;border-radius:16px;padding:14px;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+    .feature:hover{transform:translateY(-3px);filter:brightness(1.03)}
+    .feature h4{margin:8px 0 6px}
+    .feature p{margin:0;color:var(--txt-d);font-size:14px}
+    .feature .ico{
+      width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+      background:rgba(225,6,0,.12);border:1px solid rgba(225,6,0,.35)
+    }
+    .about-media{border-radius:16px;overflow:hidden;border:1px solid #1f1f1f;box-shadow:var(--shadow)}
+
+    /* ========= BRANDS ========= */
+    .brands{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:6px 0 14px
+    }
+    @media(min-width:640px){.brands{grid-template-columns:repeat(5,minmax(0,1fr))}}
+    @media(min-width:980px){.brands{grid-template-columns:repeat(9,minmax(0,1fr))}}
+    .brand-card{
+      background:linear-gradient(180deg,#151515,#101010);
+      border:1px solid #1b1b1b;border-radius:14px;padding:12px;
+      display:grid;place-items:center;cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, outline .18s ease;
+      box-shadow: var(--glow);
+    }
+    .brand-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 0 0 6px rgba(225,6,0,.08), 0 10px 24px rgba(0,0,0,.35)
+    }
+    .brand-card:focus-visible{outline:2px solid var(--rouge2);outline-offset:3px}
+    .brand-card img{width:46px;height:46px;filter:invert(1);opacity:.9}
+    .brand-legend{color:var(--txt-d);margin:4px 0 0;font-size:14px}
+
+    /* ========= CONTACT ========= */
+    #contact{border-top:1px solid #1a1a1a}
+    .contact-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid #272727;border-radius:18px;
+      padding:22px;text-align:center;display:flex;flex-direction:column;align-items:center;
+      box-shadow: 0 14px 36px rgba(0,0,0,.45);
+    }
+    .contact-card h2{margin:6px 0 8px}
+    .contact-card p{color:var(--txt-d);margin:0 0 14px}
+    .contact-card .cta{font-size:16px}
+
+    /* ========= FOOTER ========= */
+    footer{border-top:1px solid #1a1a1a;color:#a5a5a5;padding:28px 0 34px;font-size:14px}
+    .footer-top{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;margin-bottom:20px}
+    .footer-col{flex:1;min-width:200px}
+    .socials{display:flex;gap:10px;margin-top:10px}
+    .socials a{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#1c1c1c;border:1px solid #262626}
+/* Featured cars */
+#featured { border-top: 1px solid #1a1a1a; padding-top: 24px; }
+.grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:980px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.card{background:linear-gradient(180deg,#131313,#0f0f0f);border:1px solid #1b1b1b;border-radius:18px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.35);display:flex;flex-direction:column}
+.card-media{aspect-ratio:16/9;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
+/* card media stays a 16:9 frame */
+.card-media{
+  aspect-ratio:16/9;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+}
+
+/* ➜ force all car photos to fill the frame uniformly */
+.card-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;       /* fill & crop slightly = no white bands */
+  object-position:center; /* center the crop */
+  display:block;
+}
+
+.card-body{padding:14px 14px 16px}
+.car-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.meta{color:var(--txt-d);font-size:14px;margin-top:4px;letter-spacing:.2px}
+.actions{display:flex;gap:10px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid #2a2a2a;background:#151515;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,var(--rouge2),var(--rouge));border-color:#5c0d0d;color:white;font-weight:700}
+
+    /* ========= UTIL ========= */
+    .visually-hidden{position:absolute!important;clip:rect(1px,1px,1px,1px)!important;padding:0!important;border:0!important;height:1px!important;width:1px!important;overflow:hidden}
+    .slider{
+  /* était: clamp(320px, 48vw, 560px) */
+  height: clamp(320px, 38vw, 520px);   /* 38vw/520px kat9lil l-upscale */
+}
+@media (min-width:1280px){
+  .slider{ height: 520px; }            /* cap on large screens */
+}
+/* ---- STOP sticky header ---- */
+header{
+  position: relative;   /* au lieu de sticky */
+  top: auto;
+}
+
+/* ---- Menu mobile: khallih ythall lta7t mn l-header b-toul dyalo ---- */
+@media (max-width: 820px){
+  .nav-links{
+    position: absolute;
+    left: 0; right: 0;
+    top: calc(100% + 8px);   /* au lieu de top:64px */
+  }
+}
+
+header.scrolled{ box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <!-- Logo -->
+    <a href="#accueil" class="brand" aria-label="HAZEL CAR — Accueil">
+      <div class="logo"><img src="image/Logo Hazel car.pdf.pdf.svg" alt="HAZEL CAR"></div>
+      
+    </a>
+
+    <!-- Nav -->
+    <div class="nav-wrap">
+      <nav class="nav-links" id="navLinks">
+        <a href="#accueil" class="active">Accueil</a>
+        <a href="#a-propos">À propos</a>
+        <a href="#voitures">Nos voitures</a>
+        <a href="#contact">Contact</a>
+        <a href="#footer">Infos</a>
+        <a class="cta" href="reserver.html" aria-label="Aller à la page de réservation">Réserver</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu">
+        <span class="menu-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO / SLIDER -->
+<section id="accueil" class="hero">
+  <div class="slider" id="slider">
+    <div class="slide active" style="background-image:url('image/IMG_8830.PNG');"></div>
+  </div>
+
+  <div class="container hero-caption">
+    <span class="badge">Location premium</span>
+    <h1>Roulez l’esprit tranquille —  <span style="color:var(--rouge2)">HAZEL CAR</span>, réservation ultra simple</h1>
+    <p>Choisissez votre marque, puis réservez instantanément sur WhatsApp.</p>
+  </div>
+</section>
+
+<!-- A PROPOS -->
+<section id="a-propos" class="about">
+  <div class="container about-grid">
+    <div class="about-text">
+      <h2>Votre partenaire pour louer une voiture à Casablanca</h2>
+      <p class="about-lead">
+        Large gamme de véhicules : citadines, berlines, SUV, 4x4 et luxe.
+        Des modèles adaptés à tous les besoins — business, tourisme ou particuliers.
+      </p>
+      <div class="features">
+        <div class="feature"><div class="ico">🤝</div><h4>Qualité</h4><p>Véhicules récents, révisés et propres. Service premium.</p></div>
+        <div class="feature"><div class="ico">⚙️</div><h4>Flexibilité</h4><p>Formules personnalisées selon la durée et l’usage.</p></div>
+        <div class="feature"><div class="ico">🕘</div><h4>Disponibilité</h4><p>Livraison à l'aéroport disponible, réservation simple via WhatsApp.</p></div>
+      </div>
+    </div>
+    <div class="about-media">
+      <img src="image/images.jpg" alt="Casablanca – Mosquée Hassan II et voitures" />
+      <h2>la livraison à l'aéroport est    disponible</h2>
+    </div>
+  </div>
+</section>
+
+<!-- NOS VOITURES (logos) -->
+<section id="voitures">
+  <div class="container">
+    <div class="sec-head"><h2>Nos marques</h2></div>
+    <p id="brandTitle" class="brand-legend">Cliquez sur une marque pour voir les modèles</p>
+    <div class="brands" id="brands"></div>
+  </div>
+</section>
+<!-- VOITURES EN VEDETTE -->
+<section id="featured">
+  <div class="container">
+    <div class="sec-head"><h2>Voitures</h2></div>
+    <div id="featuredGrid" class="grid"></div>
+  </div>
+</section>
+
+
+<!-- CONTACT / WHATSAPP -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-card">
+      <h2>Besoin d’aide ?</h2>
+      <p>Écrivez-nous sur WhatsApp et nous répondons rapidement.</p>
+      <a class="cta" id="globalWhats"
+         href="https://wa.me/212666255730?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20voitures"
+         target="_blank" rel="noopener">💬 Ouvrir WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col">
+        <h4>HAZEL CAR</h4>
+        <p>Votre partenaire de confiance pour la location de voitures. Confort, sécurité et prix compétitifs au Maroc.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Tél: +212 06 66 25 57 30 / +212 0668529201<br>Email: hazelcar@gmail.com<br>Adresse: Casablanca-benslimane, Maroc</p>
+      </div>
+      <div class="footer-col">
+        <h4>Suivez-nous</h4>
+        <div class="socials">
+          <a href="https://www.facebook.com/share/1SAkzEfSeV/?mibextid=wwXIfr" aria-label="Facebook"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="width:18px"></a>
+          <a href="https://www.instagram.com/hazel.car01?igsh=MXFpcDlucWVkdmYxMQ==" aria-label="Instagram"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:18px"></a>
+          <a href="https://wa.me/212666255730?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20voitures" aria-label="WhatsApp"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" style="width:18px"></a>
+        </div>
+      </div>
+    </div>
+    <div>© <span id="year"></span> HAZEL CAR — Tous droits réservés</div>
+  </div>
+</footer>
+<script>
+  window.addEventListener('scroll', ()=>{
+    document.querySelector('header')
+      .classList.toggle('scrolled', window.scrollY > 12);
+  });
+</script>
+
+
+<script>
+  // ===== Burger + lien actif =====
+  (function(){
+    const btn = document.getElementById('menuBtn');
+    const header = document.querySelector('header');
+    btn && btn.addEventListener('click', ()=> header.classList.toggle('nav-open'));
+
+    const links = document.querySelectorAll('.nav-links a[href^="#"]');
+    const ids = Array.from(links).map(a=>a.getAttribute('href')).filter(Boolean);
+    const sections = ids.map(id=>document.querySelector(id)).filter(Boolean);
+    window.addEventListener('scroll', ()=>{
+      let cur = null;
+      sections.forEach(sec=>{
+        const top = sec.getBoundingClientRect().top;
+        if(top <= 120) cur = sec.id;
+      });
+      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+    });
+  })();
+</script>
+
+<script>
+  // ===== Slider auto + Ken Burns =====
+  const slides = document.querySelectorAll('.slide');
+  let idx = 0; let sliderTimer = null;
+  const sliderEl = document.getElementById('slider');
+
+  function showSlide(i){ slides.forEach((s,j)=> s.classList.toggle('active', j===i)); }
+  function startSlider(){
+    sliderTimer = setInterval(()=>{ idx = (idx+1)%slides.length; showSlide(idx); }, 5200);
+  }
+  function stopSlider(){ if(sliderTimer) clearInterval(sliderTimer); }
+  sliderEl.addEventListener('mouseenter', stopSlider);
+  sliderEl.addEventListener('mouseleave', startSlider);
+  startSlider();
+</script>
+
+<script>
+  // ===== MARQUES (logos) — clic => reserver.html?brand=MARQUE
+  const brandLogos = {
+    'Hyundai': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/hyundai.svg',
+    'Dacia': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/dacia.svg',
+    'Peugeot': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/peugeot.svg',
+    'Opel': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/opel.svg',
+    'Mercedes': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mercedes.svg',
+    'SEAT': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/seat.svg',
+    'Cupra': 'image/cupra.svg',
+    'Volkswagen': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/volkswagen.svg',
+    'Renault': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/renault.svg'
+  };
+
+  const brandsEl = document.getElementById('brands');
+  const allBrands = Object.keys(brandLogos);
+
+  function renderBrands(){
+    brandsEl.innerHTML = '';
+    allBrands.forEach(b=>{
+      const btn = document.createElement('button');
+      btn.className = 'brand-card';
+      btn.innerHTML = `<img src="${brandLogos[b]}" alt="${b}" />`;
+      btn.onclick = ()=>{ window.location.href = `reserver.html?brand=${encodeURIComponent(b)}` };
+      brandsEl.appendChild(btn);
+    });
+  }
+  renderBrands();
+  
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script>
+  // === Featured cars (8) ===
+  const featuredCars = [
+    { brand:'HYUNDAI',   name:'CRETA',   img:'image/creta8.jpeg', fuel:'essence',   gear:'automatique' },
+    { brand:'DACIA',     name:'DUSTER',  img:'image/duster1.jpg',        fuel:'diesel',    gear:'manuelle'    },
+    { brand:'Peugeot',   name:'208',     img:'image/208.jpg',           fuel:'essence',   gear:'automatique' },
+    { brand:'Opel',      name:'CORSA',   img:'image/CORSA.jpg',         fuel:'essence',   gear:'manuelle'    },
+    { brand:'Mercedes',  name:'Class-A', img:'image/CLASS A.jpg',       fuel:'diesel',    gear:'automatique' },
+    { brand:'SEAT',      name:'IBIZA',   img:'image/IBIZA.jpg',         fuel:'essence',   gear:'manuelle'    },
+    { brand:'Volkswagen',name:'Golf 8',  img:'image/GOLF 8.jpg',        fuel:'diesel',    gear:'automatique' },
+    { brand:'Renault',   name:'CLIO 5',  img:'image/clio5.jpg',         fuel:'diesel',    gear:'manuelle'    },
+  ];
+  const featuredGrid = document.getElementById('featuredGrid');
+
+  function renderFeatured(){
+    if(!featuredGrid) return;
+    featuredGrid.innerHTML = '';
+    featuredCars.forEach(c=>{
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.innerHTML = `
+        <div class="card-media"><img src="${c.img}" alt="${c.brand} ${c.name}" loading="lazy"></div>
+        <div class="card-body">
+          <div class="car-title"><strong>${c.brand} ${c.name}</strong></div>
+          <div class="meta">${c.gear} • ${c.fuel} • toute option</div>
+          <div class="actions">
+            <a class="btn primary" href="reserver.html?brand=${encodeURIComponent(c.brand)}"
+               aria-label="Réserver ${c.brand} ${c.name}">Réserver</a>
+          </div>
+        </div>`;
+      featuredGrid.appendChild(el);
+    });
+  }
+  renderFeatured();
+</script>
+
+</body>
+</html>
