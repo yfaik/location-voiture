@@ -157,7 +157,25 @@
       width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
       background:rgba(225,6,0,.12);border:1px solid rgba(225,6,0,.35)
     }
-    .about-media{border-radius:16px;overflow:hidden;border:1px solid #1f1f1f;box-shadow:var(--shadow)}
+   .about-media {
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #1f1f1f;
+  box-shadow:var(--shadow);
+  height:100%;                 /* خليها تملا العمود */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;             /* خلفية باش الصورة تبان */
+}
+
+.about-media img {
+  width:100%;
+  height:100%;
+  object-fit:cover;            /* تخلي الصورة تملا الإطار بلا ما تتكسر */
+  object-position:center;      /* تركزها فالنص */
+  display:block;
+}
 
     /* ========= BRANDS ========= */
     .brands{
