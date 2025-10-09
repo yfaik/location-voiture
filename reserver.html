@@ -190,6 +190,30 @@
   </div>
 
 <script>
+  // >>> Auto filter from URL param (add to reserver.html script)
+function getQueryParam(name){
+  try{
+    return new URLSearchParams(window.location.search).get(name);
+  }catch(e){
+    return null;
+  }
+}
+
+// On load, check param and filter
+document.addEventListener('DOMContentLoaded', ()=>{
+  const urlBrand = getQueryParam('brand');
+  if(urlBrand){
+    // normalize spacing/case
+    const normal = urlBrand.trim();
+    // update UI (title + filter)
+    filterByBrand(normal);
+    // optional: keep URL clean but still indicate brand (uncomment if you want)
+    // history.replaceState(null, '', `?brand=${encodeURIComponent(normal)}`);
+  } else {
+    render(cars);
+  }
+});
+
   // ====== CONFIG ======
   const PHONE = '212666255730'; // <-- Ton numéro WhatsApp
 
