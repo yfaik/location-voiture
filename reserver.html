@@ -3,122 +3,90 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Réserver — Choisir une marque</title>
-  <meta name="description" content="Choisissez une marque puis réservez sur WhatsApp après avoir saisi vos dates et lieux."/>
+  <title>HAZEL CAR — Réserver votre voiture</title>
+  <meta name="description" content="Choisissez une marque, saisissez vos infos et envoyez la demande sur WhatsApp. Livraison aéroport possible.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://hazelcar.com/reserver.html">
+  <meta property="og:title" content="HAZEL CAR — Réserver votre voiture">
+  <meta property="og:description" content="Réservation simple via WhatsApp. Choisissez la marque et envoyez votre demande.">
+  <meta property="og:image" content="https://hazelcar.com/image/IMG_8830.PNG">
+  <meta property="og:url" content="https://hazelcar.com/reserver.html">
+  <meta name="theme-color" content="#0b0b0c">
+  <link rel="icon" href="image/logo2.jpeg">
   <style>
-    :root{--rouge:#e10600;--rouge2:#ff3b30;--noir:#0a0a0a;--txt:#f1f1f1;--txt-d:#bdbdbd;--card:#131313;--radius:18px;--shadow:0 12px 28px rgba(0,0,0,.35)}
-    *{box-sizing:border-box} html,body{margin:0;background:linear-gradient(180deg,#090909,#111);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
+    :root{--rouge:#e10600;--rouge2:#ff3b30;--txt:#f1f1f1;--txt-d:#bdbdbd;--card:#141416;--line:#1d1d20;--radius:18px;--shadow:0 12px 28px rgba(0,0,0,.35)}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#0b0b0c,#101113);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
     a{color:inherit;text-decoration:none}
     .container{width:min(1200px,92%);margin:0 auto}
-    header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.75);backdrop-filter:blur(10px);border-bottom:1px solid #1a1a1a}
+    header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
     .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-    .logo{width:36px;height:36px;border-radius:10px;background:radial-gradient(120% 120% at 20% 20%,var(--rouge2),var(--rouge) 50%,#7b0000 75%);box-shadow:inset 0 0 20px rgba(255,255,255,.12),0 8px 16px rgba(225,6,0,.25)}
+    .logo{width:38px;height:38px;border-radius:10px;overflow:hidden;box-shadow:inset 0 0 20px rgba(255,255,255,.12),0 8px 16px rgba(225,6,0,.25)}
+    .logo img{width:100%;height:100%;object-fit:cover}
     .cta{background:linear-gradient(180deg,var(--rouge2),var(--rouge));padding:10px 16px;border-radius:999px;font-weight:700;box-shadow:0 8px 22px rgba(225,6,0,.35)}
-
     h1{font-size:clamp(22px,5vw,38px);margin:18px 0 6px}
     p.lead{color:var(--txt-d);margin:0 0 14px}
 
     .brands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
     @media(min-width:640px){.brands{grid-template-columns:repeat(5,minmax(0,1fr))}}
     @media(min-width:980px){.brands{grid-template-columns:repeat(9,minmax(0,1fr))}}
-    .brand-card{background:linear-gradient(180deg,#151515,#101010);border:1px solid #1b1b1b;border-radius:14px;padding:14px;text-align:center;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+    .brand-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;cursor:pointer;transition:transform .18s, box-shadow .18s}
     .brand-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
     .brand-card img{width:46px;height:46px;margin:0 auto 8px;filter:invert(1);opacity:.9}
-    .brand-card span{font-size:14px;color:#e5e5e5}
 
     .sec-head{display:flex;align-items:end;justify-content:space-between;margin:20px 0 10px}
     .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px}
     @media(min-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(min-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    .card{background:linear-gradient(180deg,#131313,#0f0f0f);border:1px solid #1b1b1b;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-    .card-media{aspect-ratio:16/9;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
-    .card-media img{max-width:100%;max-height:100%;object-fit:contain}
+    .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .18s}
+    .card:hover{transform:translateY(-3px)}
+    .card::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(120deg,rgba(255,59,48,.35),rgba(225,6,0,0));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .card-media{aspect-ratio:16/9;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .card-media img{width:100%;height:100%;object-fit:cover}
     .card-body{padding:14px 14px 16px}
     .car-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .meta{color:var(--txt-d);font-size:14px;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
     .actions{display:flex;gap:10px;margin-top:12px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid #2a2a2a;background:#151515;cursor:pointer}
-    .btn.primary{background:linear-gradient(180deg,var(--rouge2),var(--rouge));border-color:#5c0d0d;color:white;font-weight:700}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#151515}
+    .btn.primary{background:linear-gradient(180deg,var(--rouge2),var(--rouge));border-color:#5c0d0d;color:#fff;font-weight:700}
     .empty{color:var(--txt-d);padding:20px;border:1px dashed #343434;border-radius:12px;text-align:center}
 
-    /* Modal */
     .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100}
-    .modal{width:min(560px,92%);background:#141414;border:1px solid #242424;border-radius:16px;box-shadow:var(--shadow);padding:18px}
+    .modal{width:min(640px,92%);background:#141414;border:1px solid #242424;border-radius:16px;box-shadow:var(--shadow);padding:18px}
     .modal h3{margin:0 0 10px}
     .form-row{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px}
     @media(min-width:560px){.form-row{grid-template-columns:1fr 1fr}}
     label{font-size:14px;color:#dcdcdc;margin-bottom:6px;display:block}
-    input,select,textarea{
-      width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2b2b2b;background:#101010;color:#f3f3f3
-    }
+    input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2b2b2b;background:#101010;color:#f3f3f3}
     .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
-    .btn.ghost{background:#101010}
-    .modal small{color:var(--txt-d)}
-    .card-media{
-  aspect-ratio:16/9;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#000;
-}
-
-/* ⬅️ Remplace hadchi */
-.card-media img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-
-/* ➡️ Bi hadchi */
-.card-media img{
-  width:100%;
-  height:100%;
-  object-fit:cover;      /* y9ta3 shwiya bach ykhlat kolchi m3a l-frame */
-  object-position:center;
-  display:block;
-}
-.logo{
-  width:36px; height:36px;
-  border-radius:10px;
-  background:radial-gradient(120% 120% at 20% 20%,var(--rouge2),var(--rouge) 50%,#7b0000 75%);
-  box-shadow:inset 0 0 20px rgba(255,255,255,.12),0 8px 16px rgba(225,6,0,.25);
-  overflow:hidden;            /* bach ytsadda 3la l-img */
-}
-.logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;           /* y3emmeri l-cadre mzyan */
-  display:block;
-}
-
-
+    .seg{display:flex;gap:8px;background:#101010;border:1px solid #2b2b2b;padding:6px;border-radius:12px}
+    .seg-btn{background:transparent;border:0;padding:8px 12px;border-radius:10px;cursor:pointer;color:#e9e9e9}
+    .seg-btn.active{background:linear-gradient(180deg,var(--rouge2),var(--rouge));color:#fff}
   </style>
 </head>
 <body>
   <header>
     <div class="container header-inner">
-      <a href="index.html" class="brand"><div class="logo"><img src="image/logo2.jpeg" alt=""></div><span>HAZEL CAR</span></a>
+      <a href="index.html" class="brand" aria-label="Retour à l'accueil"><div class="logo"><img src="image/logo2.jpeg" alt=""></div><span>HAZEL CAR</span></a>
       <a class="cta" href="index.html">← Retour au site</a>
     </div>
   </header>
 
   <main class="container">
     <h1>Choisissez une marque</h1>
-    <p class="lead">Cliquez sur le logo pour voir toutes les voitures disponibles dans cette marque, puis cliquez sur <strong>Réserver</strong> pour remplir vos dates et lieux.</p>
+    <p class="lead">Cliquez sur un logo pour voir les modèles, puis <strong>Réserver</strong> pour envoyer votre demande sur WhatsApp.</p>
 
-    <!-- Logos marques -->
     <div class="brands" id="brands"></div>
 
     <div class="sec-head"><h2 id="resultTitle">Toutes les voitures</h2></div>
-    <div id="carsGrid" class="grid"></div>
+    <div id="carsGrid" class="grid" aria-live="polite"></div>
   </main>
 
-  <!-- Modal de réservation -->
   <div class="modal-backdrop" id="reserveModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Réserver — <span id="carName">Voiture</span></h3>
+
       <div class="form-row">
         <div>
           <label for="dateStart">Date de début</label>
@@ -129,42 +97,73 @@
           <input type="date" id="dateEnd" required>
         </div>
       </div>
+
       <div class="form-row">
         <div>
-          <label for="pickup">Lieu de retrait</label>
+          <label>Boîte</label>
+          
+        </div>
+        
+        
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="pickup">Retrait</label>
           <select id="pickup" required>
             <option value="">Sélectionnez…</option>
-            <option>Aéroport Mohammed V (CMN)</option>
-            <option>Casablanca Centre-ville</option>
-            <option>Aéroport Mohammed V (CMN)</option>
-            <option>Aéroport international salé</option>
-            <option>Aéroport tanger</option>
-            <option>Aéroport Marrakech</option>
-            <option>Casablanca Centre-ville</option>
-            <option>Benslimane</option>
-            <option>Mohemmadia</option>
-            <option>Rabat</option>
-            <option>Salé</option>
-            <option>Livraison à domicile (Casablanca)</option>
+            <optgroup label="Aéroports (prioritaires)">
+              <option>Aéroport Mohammed V — Casablanca (CMN)</option>
+              <option>Aéroport Rabat–Salé (RBA)</option>
+              <option>Aéroport Marrakech Menara (RAK)</option>
+              <option>Aéroport Agadir Al Massira (AGA)</option>
+              <option>Aéroport Tanger Ibn Battouta (TNG)</option>
+              <option>Aéroport Fès–Saïs (FEZ)</option>
+              <option>Aéroport Oujda Angads (OUD)</option>
+              <option>Aéroport Nador El Aroui (NDR)</option>
+              <option>Aéroport Al Hoceïma — Cherif Al Idrissi (AHU)</option>
+              <option>Aéroport Errachidia — Moulay Ali Cherif (ERH)</option>
+              <option>Aéroport Ouarzazate (OZZ)</option>
+              <option>Aéroport Laâyoune — Hassan I (EUN)</option>
+              <option>Aéroport Dakhla (VIL)</option>
+            </optgroup>
+            <optgroup label="Villes du Maroc">
+              <option>Casablanca</option><option>Rabat</option><option>Salé</option><option>Mohammedia</option><option>Kénitra</option><option>Témara</option><option>Tanger</option><option>Tétouan</option><option>Chefchaouen</option><option>Larache</option><option>Fès</option><option>Meknès</option><option>Ifrane</option><option>Oujda</option><option>Nador</option><option>Al Hoceïma</option><option>Taounate</option><option>Taza</option><option>El Jadida</option><option>Safi</option><option>Essaouira</option><option>Marrakech</option><option>Agadir</option><option>Taroudant</option><option>Tiznit</option><option>Ouarzazate</option><option>Errachidia</option><option>Tinghir</option><option>Midelt</option><option>Béni Mellal</option><option>Khouribga</option><option>Settat</option><option>Berrechid</option><option>Benslimane</option><option>Youssoufia</option><option>Chichaoua</option><option>Laâyoune</option><option>Dakhla</option><option>Guelmim</option><option>Tan-Tan</option>
+            </optgroup>
+            <optgroup label="Livraison">
+              <option>Livraison à domicile (Casablanca)</option>
+            </optgroup>
           </select>
         </div>
         <div>
-          <label for="dropoff">Lieu de retour</label>
+          <label for="dropoff">Retour</label>
           <select id="dropoff" required>
             <option value="">Sélectionnez…</option>
-            <option>Aéroport Mohammed V (CMN)</option>
-            <option>Aéroport international salé</option>
-            <option>Aéroport tanger</option>
-            <option>Aéroport Marrakech</option>
-            <option>Casablanca Centre-ville</option>
-            <option>Benslimane</option>
-            <option>Mohemmadia</option>
-            <option>Rabat</option>
-            <option>Salé</option>
-            <option>Livraison à domicile (Casablanca)</option>
+            <optgroup label="Aéroports (prioritaires)">
+              <option>Aéroport Mohammed V — Casablanca (CMN)</option>
+              <option>Aéroport Rabat–Salé (RBA)</option>
+              <option>Aéroport Marrakech Menara (RAK)</option>
+              <option>Aéroport Agadir Al Massira (AGA)</option>
+              <option>Aéroport Tanger Ibn Battouta (TNG)</option>
+              <option>Aéroport Fès–Saïs (FEZ)</option>
+              <option>Aéroport Oujda Angads (OUD)</option>
+              <option>Aéroport Nador El Aroui (NDR)</option>
+              <option>Aéroport Al Hoceïma — Cherif Al Idrissi (AHU)</option>
+              <option>Aéroport Errachidia — Moulay Ali Cherif (ERH)</option>
+              <option>Aéroport Ouarzazate (OZZ)</option>
+              <option>Aéroport Laâyoune — Hassan I (EUN)</option>
+              <option>Aéroport Dakhla (VIL)</option>
+            </optgroup>
+            <optgroup label="Villes du Maroc">
+              <option>Casablanca</option><option>Rabat</option><option>Salé</option><option>Mohammedia</option><option>Kénitra</option><option>Témara</option><option>Tanger</option><option>Tétouan</option><option>Chefchaouen</option><option>Larache</option><option>Fès</option><option>Meknès</option><option>Ifrane</option><option>Oujda</option><option>Nador</option><option>Al Hoceïma</option><option>Taounate</option><option>Taza</option><option>El Jadida</option><option>Safi</option><option>Essaouira</option><option>Marrakech</option><option>Agadir</option><option>Taroudant</option><option>Tiznit</option><option>Ouarzazate</option><option>Errachidia</option><option>Tinghir</option><option>Midelt</option><option>Béni Mellal</option><option>Khouribga</option><option>Settat</option><option>Berrechid</option><option>Benslimane</option><option>Youssoufia</option><option>Chichaoua</option><option>Laâyoune</option><option>Dakhla</option><option>Guelmim</option><option>Tan-Tan</option>
+            </optgroup>
+            <optgroup label="Livraison">
+              <option>Livraison à domicile (Casablanca)</option>
+            </optgroup>
           </select>
         </div>
       </div>
+
       <div class="form-row">
         <div>
           <label for="clientName">Votre nom</label>
@@ -175,132 +174,109 @@
           <input type="tel" id="clientPhone" placeholder="+212 6…">
         </div>
       </div>
+
       <div class="form-row">
-        <div style="grid-column:1/-1">
+       
+        <div>
           <label for="note">Message (optionnel)</label>
-          <textarea id="note" rows="3" placeholder="Besoin siège bébé, autre heure, etc."></textarea>
-          <small>Nous enverrons ces informations sur WhatsApp avec le modèle sélectionné.</small>
+          <textarea id="note" rows="3" placeholder="Heure exacte, besoin spécifique, etc."></textarea>
         </div>
       </div>
+
       <div class="modal-actions">
-        <button class="btn ghost" id="cancelBtn">Annuler</button>
+        <button class="btn" id="cancelBtn">Fermer</button>
         <button class="btn primary" id="sendBtn">Envoyer sur WhatsApp</button>
       </div>
     </div>
   </div>
 
 <script>
-  // >>> Auto filter from URL param (add to reserver.html script)
-function getQueryParam(name){
-  try{
-    return new URLSearchParams(window.location.search).get(name);
-  }catch(e){
-    return null;
-  }
-}
+  // Utils
+  function getQueryParam(name){ try{ return new URLSearchParams(window.location.search).get(name);}catch(e){return null;} }
 
-// On load, check param and filter
-document.addEventListener('DOMContentLoaded', ()=>{
-  const urlBrand = getQueryParam('brand');
-  if(urlBrand){
-    // normalize spacing/case
-    const normal = urlBrand.trim();
-    // update UI (title + filter)
-    filterByBrand(normal);
-    // optional: keep URL clean but still indicate brand (uncomment if you want)
-    // history.replaceState(null, '', `?brand=${encodeURIComponent(normal)}`);
-  } else {
-    render(cars);
-  }
-});
+  // Config
+  const PHONE='212666255730';
+  const brandLogos={
+    'Hyundai':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/hyundai.svg',
+    'Dacia':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/dacia.svg',
+    'Peugeot':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/peugeot.svg',
+    'Opel':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/opel.svg',
+    'Mercedes':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mercedes.svg',
+    'SEAT':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/seat.svg',
+    'Cupra':'image/cupra.svg',
+    'Volkswagen':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/volkswagen.svg',
+    'Renault':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/renault.svg'};
 
-  // ====== CONFIG ======
-  const PHONE = '212666255730'; // <-- Ton numéro WhatsApp
+  // Catalogue (no prices)
+  const cars=[
+    { id:'duster', brand:'Dacia', name:'Duster', fuel:'Diesel', gear:'Manuelle', img:'image/duster1.jpg'},
+    { id:'logan', brand:'Dacia', name:'Logan', fuel:'Diesel', gear:'Manuelle', img:'image/Dacia Logan.jpg'},
+    { id:'sandero-step', brand:'Dacia', name:'Sandero STEPWAY', fuel:'Diesel', gear:'Manuelle', img:'image/Dacia Sandero STEPWAY.jpg'},
+    { id:'sandero', brand:'Dacia', name:'Sandero', fuel:'Diesel', gear:'Manuelle', img:'image/Dacia Sandero.jpg'},
 
-  // Logos
-  const brandLogos = {
-    'Hyundai': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/hyundai.svg',
-    'Dacia': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/dacia.svg',
-    'Peugeot': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/peugeot.svg',
-    'Opel': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/opel.svg',
-    'Mercedes': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mercedes.svg',
-    'SEAT': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/seat.svg',
-    'Cupra': 'image/cupra.svg',
-    'Volkswagen': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/volkswagen.svg',
-    'Renault': 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/renault.svg'
-  };
+    { id:'creta', brand:'Hyundai', name:'CRETA', fuel:'Essence', gear:'Automatique', img:'image/creta8.jpeg' },
+    { id:'accent', brand:'Hyundai', name:'ACCENT', fuel:'Essence', gear:'Automatique', img:'image/ACCENT.jpg' },
+    { id:'i20', brand:'Hyundai', name:'I20', fuel:'Essence', gear:'Automatique', img:'image/I20.jpg' },
+    { id:'tucson', brand:'Hyundai', name:'TUCSON', fuel:'Essence', gear:'Automatique', img:'image/TUCSON.jpg' },
 
-  // Données voitures (exemples)
-  const cars = [
-    { id:'duster', brand:'Dacia', name:'Duster', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2021, img:'image/duster1.jpg'},
-    { id:'logan', brand:'Dacia', name:'Logan', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2021, img:'image/Dacia Logan.jpg'},
-    { id:'sandero-step', brand:'Dacia', name:'Sandero STEPWAY', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2021, img:'image/Dacia Sandero STEPWAY.jpg'},
-    { id:'sandero', brand:'Dacia', name:'Sandero', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2021, img:'image/Dacia Sandero.jpg'},
+    { id:'aclass', brand:'Mercedes', name:'A-Class', fuel:'Diesel', gear:'Automatique', img:'image/CLASS A.jpg' },
 
-    { id:'creta', brand:'Hyundai', name:'CRETA', category:'Toute option', fuel:'Essence', gear:'Automatique', ac:true, year:2020, img:'image/creta8.jpeg' },
-    { id:'accent', brand:'Hyundai', name:'ACCENT', category:'Toute option', fuel:'Essence', gear:'Automatique', ac:true, year:2020, img:'image/ACCENT.jpg' },
-    { id:'i20', brand:'Hyundai', name:'I20', category:'Toute option', fuel:'Essence', gear:'Automatique', ac:true, year:2020, img:'image/I20.jpg' },
-    { id:'tucson', brand:'Hyundai', name:'TUCSON', category:'Toute option', fuel:'Essence', gear:'Automatique', ac:true, year:2020, img:'image/TUCSON.jpg' },
+    { id:'clio5', brand:'Renault', name:'CLIO 5', fuel:'Diesel', gear:'Manuelle', img:'image/clio5.jpg' },
+    { id:'clio6', brand:'Renault', name:'CLIO 6', fuel:'Essence', gear:'Manuelle', img:'image/clio6.jpg' },
+    { id:'kardian', brand:'Renault', name:'KARDIAN', fuel:'Diesel', gear:'Manuelle', img:'image/KARDIAN.jpg' },
 
-    { id:'aclass', brand:'Mercedes', name:'A-Class', category:'Luxe', fuel:'Diesel', gear:'Automatique', ac:true, year:2023, img:'image/CLASS A.jpg' },
+    { id:'g8', brand:'Volkswagen', name:'Golf 8', fuel:'Diesel', gear:'Automatique', img:'image/GOLF 8.jpg' },
+    { id:'troc', brand:'Volkswagen', name:'T-ROC', fuel:'Diesel', gear:'Automatique', img:'image/T6ROC.jpg' },
 
-    { id:'clio5', brand:'Renault', name:'CLIO 5', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2022, img:'image/clio5.jpg' },
-    { id:'clio6', brand:'Renault', name:'CLIO 6', category:'Toute option', fuel:'Essence', gear:'Manuelle', ac:true, year:2022, img:'image/clio6.jpg' },
-    { id:'kardian', brand:'Renault', name:'KARDIAN', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2024, img:'image/KARDIAN.jpg' },
+    { id:'corsa', brand:'Opel', name:'CORSA', fuel:'Diesel', gear:'Manuelle', img:'image/CORSA.jpg' },
+    { id:'astra', brand:'Opel', name:'ASTRA', fuel:'Diesel', gear:'Manuelle', img:'image/ASTRA.jpg' },
+    { id:'mokka', brand:'Opel', name:'MOKKA', fuel:'Diesel', gear:'Manuelle', img:'image/MOKKA.jpg' },
 
-    { id:'golf8', brand:'Volkswagen', name:'Golf 8', category:'Toute optio', fuel:'Diesel', gear:'Automatique', ac:true, year:2019, img:'image/GOLF 8.jpg' },
-    { id:'troc', brand:'Volkswagen', name:'T-ROC', category:'Toute option', fuel:'Diesel', gear:'Automatique', ac:true, year:2019, img:'image/T6ROC.jpg' },
+    { id:'ibiza', brand:'SEAT', name:'IBIZA', fuel:'Essence', gear:'Automatique', img:'image/IBIZA.jpg' },
 
-    { id:'corsa', brand:'Opel', name:'CORSA', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2019, img:'image/CORSA.jpg' },
-    { id:'astra', brand:'Opel', name:'ASTRA', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2019, img:'image/ASTRA.jpg' },
-    { id:'mokka', brand:'Opel', name:'MOKKA', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2019, img:'image/MOKKA.jpg' },
+    { id:'lion', brand:'Cupra', name:'LION', fuel:'Diesel', gear:'Automatique', img:'image/LION.jpg' },
+    { id:'formentor', brand:'Cupra', name:'Formentor', fuel:'Diesel', gear:'Automatique', img:'image/FORMENTOR.jpg' },
 
-    { id:'ibiza', brand:'SEAT', name:'IBIZA', category:'Toute option', fuel:'Diesel', gear:'Automatique', ac:true, year:2020, img:'image/IBIZA.jpg' },
-
-    { id:'lion', brand:'Cupra', name:'LION', category:'Toute option', fuel:'Diesel', gear:'Automatique', ac:true, year:2022, img:'image/LION.jpg' },
-    { id:'formentor', brand:'Cupra', name:'Formentor', category:'Toute option', fuel:'Diesel', gear:'Automatique', ac:true, year:2022, img:'image/FORMENTOR.jpg' },
-
-    { id:'p208', brand:'Peugeot', name:'208', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2022, img:'image/208.jpg' },
-    { id:'p308', brand:'Peugeot', name:'308', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2022, img:'image/308.jpg' },
-    { id:'p2008', brand:'Peugeot', name:'2008', category:'Toute option', fuel:'Diesel', gear:'Manuelle', ac:true, year:2022, img:'image/2008.jpg' }
+    { id:'p208', brand:'Peugeot', name:'208', fuel:'Diesel', gear:'Manuelle', img:'image/208.jpg' },
+    { id:'p308', brand:'Peugeot', name:'308', fuel:'Diesel', gear:'Manuelle', img:'image/308.jpg' },
+    { id:'p2008', brand:'Peugeot', name:'2008', fuel:'Diesel', gear:'Manuelle', img:'image/2008.jpg' }
   ];
+  (function(){
+const extra=JSON.parse(localStorage.getItem('hazel_cars_extra')||'[]');
+if(!extra.length) return;
+// Adapter le format au tableau "cars"
+extra.forEach(c=>{
+cars.push({ id:c.id, brand:c.brand, name:c.name, fuel:c.fuel, gear:c.gear, img:c.img });
+});
+// Rebuild UI (logos + cartes) si déjà chargé
+// (option simple : on laisse le rendu initial se baser sur "cars" étendu avant DOMContentLoaded)
+})();
 
-  // --- UI: logos ---
-  const brandsEl = document.getElementById('brands');
-  const uniqueBrands = ['Hyundai','Dacia','Peugeot','Opel','Mercedes','SEAT','Cupra','Volkswagen','Renault'];
-  uniqueBrands.forEach(b=>{
-    const card = document.createElement('button');
-    card.className = 'brand-card';
-    card.innerHTML = `<img src="${brandLogos[b]}" alt="${b}">`;
-    card.onclick = ()=> filterByBrand(b);
-    brandsEl.appendChild(card);
-  });
+  // Logos UI
+  const brandsEl=document.getElementById('brands');
+  const uniqueBrands=[...new Set(cars.map(c=>c.brand))];
+  uniqueBrands.forEach(b=>{const card=document.createElement('button');card.className='brand-card';card.innerHTML=`<img src="${brandLogos[b]}" alt="${b}">`;card.onclick=()=> filterByBrand(b);brandsEl.appendChild(card)});
 
-  // --- UI: cards ---
-  const grid = document.getElementById('carsGrid');
-  const title = document.getElementById('resultTitle');
+  // Cards
+  const grid=document.getElementById('carsGrid');
+  const title=document.getElementById('resultTitle');
 
   function render(list){
-    grid.innerHTML = '';
+    grid.innerHTML='';
     if(!list.length){ grid.innerHTML = `<div class="empty">Aucun véhicule disponible pour cette marque pour le moment.</div>`; return; }
     list.forEach(c=>{
-      const el = document.createElement('article'); el.className='card';
-      el.innerHTML = `
+      const el=document.createElement('article'); el.className='card';
+      el.innerHTML=`
         <div class="card-media"><img src="${c.img}" alt="${c.brand} ${c.name}" loading="lazy"></div>
         <div class="card-body">
           <div class="car-title"><strong>${c.brand} ${c.name}</strong></div>
-          <div class="meta"><span>${c.category}</span> • <span>${c.fuel}</span> • <span>${c.gear}</span></div>
+          <div class="meta"><span>${c.fuel}</span> • <span>${c.gear}</span> • <span>Livraison aéroport</span></div>
           <div class="actions">
-            <button class="btn primary reserve-btn"
-              data-id="${c.id}" data-brand="${c.brand}" data-name="${c.name}">
-              Réserver
-            </button>
+            <button class="btn primary reserve-btn" data-id="${c.id}" data-brand="${c.brand}" data-name="${c.name}">Réserver</button>
           </div>
         </div>`;
       grid.appendChild(el);
     });
-
-    // Bind buttons -> open modal
     document.querySelectorAll('.reserve-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
         const carLabel = `${btn.dataset.brand} ${btn.dataset.name}`;
@@ -309,67 +285,136 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  function filterByBrand(brand){
-    title.textContent = brand ? `Voitures disponibles — ${brand}` : 'Toutes les voitures';
-    const list = brand ? cars.filter(c=>c.brand.toLowerCase()===brand.toLowerCase()) : cars;
-    render(list);
-  }
-  render(cars); // par défaut
+  function filterByBrand(brand){ title.textContent = brand ? `Voitures disponibles — ${brand}` : 'Toutes les voitures'; const list = brand ? cars.filter(c=>c.brand===brand) : cars; render(list); }
 
-  // ===== Modal logic =====
-  const modal = document.getElementById('reserveModal');
-  const carNameEl = document.getElementById('carName');
-  const dateStart = document.getElementById('dateStart');
-  const dateEnd = document.getElementById('dateEnd');
-  const pickup = document.getElementById('pickup');
-  const dropoff = document.getElementById('dropoff');
-  const clientName = document.getElementById('clientName');
-  const clientPhone = document.getElementById('clientPhone');
-  const note = document.getElementById('note');
+  document.addEventListener('DOMContentLoaded', ()=>{ const urlBrand=getQueryParam('brand'); if(urlBrand){ filterByBrand(urlBrand.trim()); } else { render(cars); } });
+
+  // Modal
+  const modal=document.getElementById('reserveModal');
+  const carNameEl=document.getElementById('carName');
+  const dateStart=document.getElementById('dateStart');
+  const dateEnd=document.getElementById('dateEnd');
+  const pickup=document.getElementById('pickup');
+  const dropoff=document.getElementById('dropoff');
+  const clientName=document.getElementById('clientName');
+  const clientPhone=document.getElementById('clientPhone');
+  const note=document.getElementById('note');
+
+  let selectedGear='Automatique', selectedFuel='Essence';
+  function bindSeg(id, setter){ const el=document.getElementById(id); if(!el) return; el.addEventListener('click', e=>{ if(e.target.classList.contains('seg-btn')){ el.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); setter(e.target.dataset.gear||e.target.dataset.fuel); } }); }
+  bindSeg('segGear', (v)=> selectedGear=v);
+  bindSeg('segFuel', (v)=> selectedFuel=v);
 
   function openModal(carLabel){
     carNameEl.textContent = carLabel;
-    // Pré-remplir dates (aujourd’hui + demain)
-    const today = new Date(); const tomorrow = new Date(Date.now()+86400000);
-    dateStart.value = today.toISOString().slice(0,10);
-    dateEnd.value = tomorrow.toISOString().slice(0,10);
-    pickup.value = ''; dropoff.value=''; clientName.value=''; clientPhone.value=''; note.value='';
-    modal.style.display = 'flex';
+    const today=new Date(); const tomorrow=new Date(Date.now()+86400000);
+    dateStart.min=today.toISOString().slice(0,10);
+    dateEnd.min=today.toISOString().slice(0,10);
+    dateStart.value=today.toISOString().slice(0,10);
+    dateEnd.value=tomorrow.toISOString().slice(0,10);
+    pickup.value=''; dropoff.value=''; clientName.value=''; clientPhone.value=''; note.value='';
+    modal.style.display='flex';
   }
-  function closeModal(){ modal.style.display = 'none'; }
-
-  // Close on backdrop click
-  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+  function closeModal(){ modal.style.display='none'; }
+  modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
   document.getElementById('cancelBtn').addEventListener('click', closeModal);
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && modal.style.display==='flex') closeModal(); });
 
-  // Envoyer sur WhatsApp
   document.getElementById('sendBtn').addEventListener('click', ()=>{
-    // validations simples
-    if(!dateStart.value || !dateEnd.value || !pickup.value || !dropoff.value || !clientName.value){
-      alert('Merci de compléter: dates, lieux, et votre nom.');
-      return;
-    }
-    const car = carNameEl.textContent;
+    if(!dateStart.value || !dateEnd.value || !pickup.value || !dropoff.value || !clientName.value){ alert('Merci de compléter: dates, lieux, et votre nom.'); return; }
     const msg = [
       `Bonjour, je souhaite réserver :`,
-      `- Véhicule : ${car}`,
-      `- Dates : du ${formatDate(dateStart.value)} au ${formatDate(dateEnd.value)}`,
-      `- Retrait : ${pickup.value}`,
-      `- Retour : ${dropoff.value}`,
-      `Mon nom : ${clientName.value}`,
-      clientPhone.value ? `Téléphone : ${clientPhone.value}` : null,
-      note.value ? `Notes : ${note.value}` : null
+      `• Véhicule : ${carNameEl.textContent}`,
+      `• Boîte : ${selectedGear} — Carburant : ${selectedFuel}`,
+      `• Dates : du ${dateStart.value.split('-').reverse().join('/')} au ${dateEnd.value.split('-').reverse().join('/')}`,
+      `• Retrait : ${pickup.value}`,
+      `• Retour : ${dropoff.value}`,
+      `• Nom : ${clientName.value}`,
+      clientPhone.value ? `• Téléphone : ${clientPhone.value}` : null,
+      note.value ? `• Notes : ${note.value}` : null
     ].filter(Boolean).join('\n');
-
-    const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank', 'noopener');
+    const url=`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+    window.open(url,'_blank','noopener');
     closeModal();
   });
+  // ==== Avis après envoi WhatsApp ====
+const rateBackdrop=document.getElementById('rateBackdrop');
+const rateStars=document.getElementById('rateStars');
+const rateName=document.getElementById('rateName');
+const rateComment=document.getElementById('rateComment');
+const rateCancel=document.getElementById('rateCancel');
+const rateSave=document.getElementById('rateSave');
+let chosen=5;
 
-  function formatDate(iso){
-    const [y,m,d] = iso.split('-');
-    return `${d}/${m}/${y}`;
-  }
+
+function openRate(){
+// éviter de redemander si déjà envoyé dans cette session
+if(sessionStorage.getItem('hz_review_done')==='1') return;
+rateBackdrop.style.display='flex';
+}
+function closeRate(){ rateBackdrop.style.display='none'; }
+
+
+rateStars.addEventListener('click', (e)=>{
+const v=e.target.dataset.v; if(!v) return; chosen=+v;
+[...rateStars.querySelectorAll('.star')].forEach(s=>{
+s.classList.toggle('on', +s.dataset.v<=chosen);
+});
+});
+
+
+rateCancel.addEventListener('click', closeRate);
+rateBackdrop.addEventListener('click', (e)=>{ if(e.target===rateBackdrop) closeRate(); });
+
+
+rateSave.addEventListener('click', ()=>{
+const name=(rateName.value||'Client').trim();
+const comment=(rateComment.value||'').trim();
+const item={ name, rating:chosen, comment, date:new Date().toISOString() };
+const key='hazel_reviews';
+const list=JSON.parse(localStorage.getItem(key)||'[]');
+list.unshift(item); // devant
+localStorage.setItem(key, JSON.stringify(list.slice(0,100))); // max 100
+sessionStorage.setItem('hz_review_done','1');
+closeRate();
+alert('Merci ! Votre avis sera visible sur la page d’accueil.');
+});
 </script>
+<style>
+.rate-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:120}
+.rate-modal{width:min(560px,92%);background:#141414;border:1px solid #242424;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,.35);padding:18px}
+.rate-modal h3{margin:0 0 6px}
+.stars{display:flex;gap:8px;margin:8px 0 10px}
+.star{font-size:28px;cursor:pointer;filter:grayscale(1);opacity:.7}
+.star.on{filter:none;opacity:1}
+.rate-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid #2b2b2b;background:#101010;color:#f3f3f3}
+.btn.primary{background:linear-gradient(180deg,#ff3b30,#e10600);border-color:#5c0d0d;font-weight:700}
+</style>
+<div class="rate-backdrop" id="rateBackdrop">
+<div class="rate-modal" role="dialog" aria-modal="true" aria-labelledby="rateTitle">
+<h3 id="rateTitle">Merci ! Laissez un avis ⭐</h3>
+<p style="color:#cfcfcf;margin:0 0 6px">Votre retour apparaît (après actualisation) dans la page d’accueil.</p>
+<div class="stars" id="rateStars" aria-label="Note en étoiles">
+<span class="star" data-v="1">★</span>
+<span class="star" data-v="2">★</span>
+<span class="star" data-v="3">★</span>
+<span class="star" data-v="4">★</span>
+<span class="star" data-v="5">★</span>
+</div>
+<label for="rateName" style="font-size:14px;color:#dcdcdc;display:block;margin:8px 0 6px">Votre nom</label>
+<input id="rateName" type="text" placeholder="Ex : Yassine" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2b2b2b;background:#101010;color:#f3f3f3">
+
+
+<label for="rateComment" style="font-size:14px;color:#dcdcdc;display:block;margin:10px 0 6px">Commentaire</label>
+<textarea id="rateComment" rows="3" placeholder="Service top, livraison aéroport à l’heure, etc." style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2b2b2b;background:#101010;color:#f3f3f3"></textarea>
+
+
+<div class="rate-actions">
+<button class="btn" id="rateCancel">Plus tard</button>
+<button class="btn primary" id="rateSave">Publier</button>
+</div>
+</div>
+</div>
 </body>
 </html>
