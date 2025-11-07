@@ -4,14 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HAZEL CAR — Location de voitures au Maroc</title>
-  <meta name="description" content="Louez votre voiture au Maroc en quelques clics. Réservation WhatsApp, livraison aéroport, service premium."/>
+  <meta name="description" content="Louez votre voiture au Maroc en quelques clics. Réservation WhatsApp, livraison aéroport, service premium.">
   <meta name="robots" content="index,follow">
   <meta name="author" content="HAZEL CAR">
+
+  <!-- Canonical + hreflang -->
   <link rel="canonical" href="https://hazelcar.com/">
   <link rel="alternate" href="https://hazelcar.com/" hreflang="fr-MA">
   <link rel="alternate" href="https://hazelcar.com/" hreflang="x-default">
 
-  <!-- Open Graph & Twitter -->
+  <!-- Favicons (مهم باش يبان اللوغو فنتائج Google) -->
+  <!-- وفّر هاد الملفات فعلاً فالمسارات المذكورة -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/icons/favicon-32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/icons/favicon-48.png" sizes="48x48">
+  <link rel="icon" type="image/png" href="/icons/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="HAZEL CAR — Location de voitures au Maroc">
   <meta property="og:description" content="Réservation rapide sur WhatsApp. Large choix de véhicules : citadines, SUV et luxe.">
@@ -22,9 +34,24 @@
   <meta name="twitter:title" content="HAZEL CAR — Location de voitures au Maroc">
   <meta name="twitter:description" content="Réservation WhatsApp, livraison aéroport, service premium.">
   <meta name="twitter:image" content="https://hazelcar.com/image/IMG_8830.PNG">
-  <link rel="icon" href="/image/logo2.jpeg">
+
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <meta name="theme-color" content="#0b0b0c">
+
+  <!-- Structured Data: Organization + CarRental (باش Google يعرف اللوغو الرسمي) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HAZEL CAR",
+    "url": "https://hazelcar.com/",
+    "logo": "https://hazelcar.com/icons/logo-512.png",
+    "sameAs": [
+      "https://www.facebook.com/share/1SAkzEfSeV/?mibextid=wwXIfr",
+      "https://www.instagram.com/hazel.car01?igsh=MXFpcDlucWVkdmYxMQ==",
+      "https://wa.me/212666255730"
+    ]
+  }
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -32,12 +59,9 @@
     "name": "HAZEL CAR",
     "url": "https://hazelcar.com/",
     "image": "https://hazelcar.com/image/IMG_8830.PNG",
+    "logo": "https://hazelcar.com/icons/logo-512.png",
     "telephone": "+212666255730",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Casablanca",
-      "addressCountry": "MA"
-    },
+    "address": { "@type": "PostalAddress", "addressLocality": "Casablanca", "addressCountry": "MA" },
     "areaServed": "Morocco",
     "openingHours": "Mo-Su 08:00-22:00",
     "sameAs": [
@@ -47,6 +71,7 @@
     ]
   }
   </script>
+
   <style>
     :root{--rouge:#e10600;--rouge2:#ff3b30;--txt:#f2f2f3;--txt-d:#bdbdbf;--bg:#0b0b0c;--bg2:#101113;--card:#141416;--line:#1d1d20;--radius:18px;--shadow:0 14px 36px rgba(0,0,0,.38)}
     *{box-sizing:border-box}
@@ -146,7 +171,10 @@
 <header>
   <div class="container header-inner">
     <a href="#accueil" class="brand" aria-label="HAZEL CAR — Accueil">
-      <div class="logo"><img src="image/logo2.jpeg" alt="HAZEL CAR"></div><span>HAZEL CAR</span>
+      <div class="logo">
+        <img src="image/logo2.jpeg" alt="Logo HAZEL CAR" width="42" height="42" decoding="async" fetchpriority="high">
+      </div>
+      <span>HAZEL CAR</span>
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#accueil" class="active">Accueil</a>
@@ -176,7 +204,7 @@
   <div class="container">
     <div class="sec-head"><h2>Nos marques</h2></div>
     <p class="brand-legend">Cliquez sur une marque pour voir les modèles</p>
-    <div class="brands" id="brands"></div>
+    <div class="brands" id="brands" aria-label="Marques disponibles"></div>
   </div>
 </section>
 
@@ -203,11 +231,12 @@
     </div>
     <div class="about-media">
       <img src="image/images.jpg" alt="Casablanca – Mosquée Hassan II et voitures" />
-      <h2>la livraison à l'aéroport est    disponible</h2>
+      <h2>la livraison à l'aéroport est disponible</h2>
     </div>
   </div>
 </section>
-<!-- ==== MODALE AVIS ==== -->
+
+<!-- ==== MODALE AVIS (كتشدّ التعاليق من LocalStorage) ==== -->
 <style>
   .rate-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:120}
   .rate-modal{width:min(560px,92%);background:#141414;border:1px solid #242424;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,.35);padding:18px}
@@ -241,7 +270,6 @@
   </div>
 </div>
 
-
 <section id="temoignages" class="testimonials">
   <div class="container">
     <div class="sec-head"><h2>Ils nous font confiance</h2></div>
@@ -252,8 +280,6 @@
     </div>
   </div>
 </section>
-
-
 
 <section id="contact">
   <div class="container">
@@ -286,22 +312,24 @@
 <div class="float-wa"><a href="https://wa.me/212666255730" target="_blank" rel="noopener">WhatsApp</a></div>
 
 <script>
+  // Inject reviews saved from reserver.html
   (function(){
-const key='hazel_reviews';
-const list=JSON.parse(localStorage.getItem(key)||'[]');
-if(!list.length) return;
-const twrap=document.getElementById('twrap');
-list.slice(0,15).forEach(r=>{
-const el=document.createElement('div');
-el.className='tcard';
-const stars='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
-const d=new Date(r.date);
-const dd=d.toLocaleDateString('fr-FR');
-el.innerHTML=`<strong>${r.name}</strong><p style="margin:.25rem 0">${stars}</p><p>${r.comment?r.comment.replace(/</g,'&lt;'):'(sans commentaire)'}<br><span style="color:#9a9a9a;font-size:12px">${dd}</span></p>`;
-twrap.appendChild(el);
-});
-})();
-  // Header / Active link / Back to top
+    const key='hazel_reviews';
+    const list=JSON.parse(localStorage.getItem(key)||'[]');
+    if(!list.length) return;
+    const twrap=document.getElementById('twrap');
+    list.slice(0,15).forEach(r=>{
+      const el=document.createElement('div');
+      el.className='tcard';
+      const stars='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
+      const d=new Date(r.date);
+      const dd=d.toLocaleDateString('fr-FR');
+      el.innerHTML=`<strong>${r.name}</strong><p style="margin:.25rem 0">${stars}</p><p>${r.comment?r.comment.replace(/</g,'&lt;'):'(sans commentaire)'}<br><span style="color:#9a9a9a;font-size:12px">${dd}</span></p>`;
+      twrap.appendChild(el);
+    });
+  })();
+
+  // Header menu / Active link / Back to top
   window.addEventListener('scroll',()=>{document.getElementById('toTop').style.display=window.scrollY>300?'block':'none'});
   document.getElementById('toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   (function(){const btn=document.getElementById('menuBtn');const header=document.querySelector('header');btn&&btn.addEventListener('click',()=>header.classList.toggle('nav-open'));const links=[...document.querySelectorAll('.nav-links a[href^="#"]')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);window.addEventListener('scroll',()=>{let cur=null;secs.forEach(s=>{if(s.getBoundingClientRect().top<=120) cur=s.id});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));});})();
@@ -324,29 +352,27 @@ twrap.appendChild(el);
     'Cupra':'image/cupra.svg',
     'Volkswagen':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/volkswagen.svg',
     'Renault':'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/renault.svg'};
-  const brandsEl=document.getElementById('brands'); Object.keys(brandLogos).forEach(b=>{const a=document.createElement('a');a.className='brand-card';a.href=`reserver.html?brand=${encodeURIComponent(b)}`;a.setAttribute('aria-label',`Voir ${b}`);a.innerHTML=`<img src="${brandLogos[b]}" alt="${b}">`;brandsEl.appendChild(a)});
+  const brandsEl=document.getElementById('brands');
+  Object.keys(brandLogos).forEach(b=>{
+    const a=document.createElement('a');
+    a.className='brand-card';
+    a.href=`reserver.html?brand=${encodeURIComponent(b)}`;
+    a.setAttribute('aria-label',`Voir ${b}`);
+    a.innerHTML=`<img src="${brandLogos[b]}" alt="${b}">`;
+    brandsEl.appendChild(a);
+  });
 
   // Featured cars (no prices)
   const featuredCars=[
     { brand:'Hyundai', name:'CRETA',   img:'image/creta8.jpeg',  fuel:'Essence', gear:'Automatique' },
     { brand:'Dacia',   name:'DUSTER',  img:'image/duster1.jpg', fuel:'Diesel',  gear:'Manuelle'     },
-    { brand:'Peugeot', name:'208',     img:'image/208.jpg',     fuel:'Diesel', gear:'Manuelle' },
+    { brand:'Peugeot', name:'208',     img:'image/208.jpg',     fuel:'Diesel',  gear:'Manuelle'     },
     { brand:'Opel',    name:'CORSA',   img:'image/CORSA.jpg',   fuel:'Diesel',  gear:'Manuelle'     },
-    { brand:'Mercedes',name:'Class-A', img:'image/CLASS A.jpg', fuel:'Diesel',  gear:'Automatique' },
-    { brand:'SEAT',    name:'IBIZA',   img:'image/IBIZA.jpg',   fuel:'Essence', gear:'Automatique'    },
-    { brand:'Volkswagen',name:'Golf 8',img:'image/GOLF 8.jpg',  fuel:'Diesel',  gear:'Automatique' },
-    { brand:'Renault', name:'CLIO 5',  img:'image/clio5.jpg',   fuel:'Diesel',  gear:'Manuelle'    }
+    { brand:'Mercedes',name:'Class-A', img:'image/CLASS A.jpg', fuel:'Diesel',  gear:'Automatique'  },
+    { brand:'SEAT',    name:'IBIZA',   img:'image/IBIZA.jpg',   fuel:'Essence', gear:'Automatique'  },
+    { brand:'Volkswagen',name:'Golf 8',img:'image/GOLF 8.jpg',  fuel:'Diesel',  gear:'Automatique'  },
+    { brand:'Renault', name:'CLIO 5',  img:'image/clio5.jpg',   fuel:'Diesel',  gear:'Manuelle'     }
   ];
-  (function(){
-const extra=JSON.parse(localStorage.getItem('hazel_cars_extra')||'[]');
-const featuredExtra=extra.filter(c=>c.featured);
-if(!featuredExtra.length) return;
-featuredExtra.forEach(c=>{
-featuredCars.push({ brand:c.brand, name:c.name, img:c.img, fuel:c.fuel, gear:c.gear });
-});
-renderFeatured(featuredCars);
-})();
-
   const featuredGrid=document.getElementById('featuredGrid');
   function renderFeatured(list){
     featuredGrid.innerHTML='';
